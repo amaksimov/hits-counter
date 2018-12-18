@@ -1,0 +1,9 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "postgres",
+    "password": "postgres",
+    "host": "db",
+    "database": "hits-counter_dev"
+  }
+}
