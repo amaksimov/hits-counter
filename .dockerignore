@@ -4,3 +4,6 @@
 
 # Ignore all installed node_moduels
 /node_modules/*
+
+# Ignore circle ci config
+/.circleci

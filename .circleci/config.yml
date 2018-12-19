@@ -1,0 +1,30 @@
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+    machine: true
+    steps:
+      - checkout
+
+      - run:
+          name: Install Docker Compose
+          command: |
+              curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+              chmod +x ~/docker-compose
+              sudo mv ~/docker-compose /usr/local/bin/docker-compose
+
+      - run:
+          name: Build application Docker image
+          command: docker-compose build
+
+      - run:
+          name: Npm Audit
+          command: docker-compose run app npm audit
+
+      - run:
+          name: ESLint
+          command: docker-compose run app ./node_modules/.bin/eslint --fix ./
