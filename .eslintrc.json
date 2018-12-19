@@ -1,9 +1,13 @@
 {
     "env": {
-        "browser": true,
-        "es6": true
+        "node": true,
+        "es6": true,
+        "mocha": true
     },
     "extends": "airbnb",
+    "plugins": [
+        "mocha"
+    ],
     "rules": {
         "indent": [
             "error",
@@ -20,6 +24,7 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "mocha/no-exclusive-tests": "error"
     }
 }

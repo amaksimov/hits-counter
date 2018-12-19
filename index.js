@@ -2,9 +2,9 @@ const express = require('express');
 
 const app = express();
 
-const pgp = require('pg-promise')();
+// const pgp = require('pg-promise')();
 
-const db = pgp(process.env.DATABASE_URL);
+const db = require('./db');
 
 const PORT = process.env.PORT || 1234;
 
@@ -20,4 +20,4 @@ app.get('/', (request, response) => {
         });
 });
 
-app.listen(PORT);
+module.exports = app.listen(PORT);
