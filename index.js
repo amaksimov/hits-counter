@@ -1,25 +1,18 @@
 const express = require('express')
-const storage = require('node-persist');
 const app = express()
 
-// Set storage ttl to be 2 seconds.
-const ttl = 2000;
-
-app.use(require('express-session')({
-
-        name: '_es_demo',
-        secret: '1234', // The secret is required, and is used for signing cookies
-        resave: false, // Force save of session for each request.
-        saveUninitialized: false // Save a session that is new, but has not been modified
-
-    }));
+var pgp = require('pg-promise')();
+const db = pgp('postgres://postgres:postgres@db:5432/hits-counter_dev');
 
 app.get('/', function (request, response) {
-    if (!request.session.count) {
-        request.session.count = 0;
-    }
-    request.session.count += 1;
-    response.json(request.session);
+    db.none('INSERT INTO hits(created_at) VALUES(${timestamp})', {
+        timestamp: new Date()
+    })
+
+    db.one('select count(*) from hits where created_at > $1', [ new Date(new Date() - 60000)], c => +c.count)
+        .then(count => {
+            response.send({pageviews: count});
+        });
 });
 
 app.listen(1234)
