@@ -27,4 +27,11 @@ jobs:
 
       - run:
           name: ESLint
-          command: docker-compose run app ./node_modules/.bin/eslint --fix ./
+          command: docker-compose run app ./node_modules/.bin/eslint .
+
+      - run:
+          name: Setup DB
+          command: |
+            DATABASE_URL=postgres://postgres:postgres@db:5432 docker-compose run app ./node_modules/.bin/db-migrate db:create hits-counter_test
+            docker-compose run app ./node_modules/.bin/db-migrate up
+
