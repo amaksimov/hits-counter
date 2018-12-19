@@ -4,12 +4,14 @@ const app = express();
 
 const pgp = require('pg-promise')();
 
-const db = pgp('postgres://postgres:postgres@db:5432/hits-counter_dev');
+const db = pgp(process.env.DATABASE_URL);
 
 app.get('/', (request, response) => {
     db.none('INSERT INTO hits(created_at) VALUES($1)', [new Date()])
         .then(() => {
-            db.one('select count(*) from hits where created_at > $1', [new Date(new Date() - 60000)], c => +c.count)
+            const oneMinuteAgo = new Date(new Date() - 60000);
+
+            db.one('select count(*) from hits where created_at > $1', [oneMinuteAgo], c => +c.count)
                 .then((count) => {
                     response.send({ pageviews: count });
                 });
