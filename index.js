@@ -6,6 +6,8 @@ const pgp = require('pg-promise')();
 
 const db = pgp(process.env.DATABASE_URL);
 
+const PORT = process.env.PORT || 1234;
+
 app.get('/', (request, response) => {
     db.none('INSERT INTO hits(created_at) VALUES($1)', [new Date()])
         .then(() => {
@@ -18,4 +20,4 @@ app.get('/', (request, response) => {
         });
 });
 
-app.listen(1234);
+app.listen(PORT);
