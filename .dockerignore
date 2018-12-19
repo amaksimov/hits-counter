@@ -1,0 +1,6 @@
+# git system files
+.git
+.gitignore
+
+# Ignore all installed node_moduels
+/node_modules/*
