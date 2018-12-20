@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hits-counter-ing
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              serviceName: hits-counter
+              servicePort: 3000
+            path: /

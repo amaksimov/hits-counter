@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: setup
+spec:
+  template:
+    metadata:
+      name: setup
+    spec:
+      containers:
+      - name: setup
+        image: amaksimov/hits-counter:latest
+        command: ["/hits-counter/node_modules/.bin/db-migrate", "db:create", "hits-counter"]
+        env:
+        - name: DATABASE_URL
+          value: "postgres://postgres:postgres@postgres:5432"
+        imagePullPolicy: Never
+      restartPolicy: Never

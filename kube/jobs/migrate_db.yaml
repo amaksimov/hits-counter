@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrate
+spec:
+  template:
+    metadata:
+      name: migrate
+    spec:
+      containers:
+      - name: migrate
+        image: amaksimov/hits-counter:latest
+        command: ["/hits-counter/node_modules/.bin/db-migrate", "up"]
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: "app-db-url"
+              key: "databaseurl"
+        imagePullPolicy: Never
+      restartPolicy: Never

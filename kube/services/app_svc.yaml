@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hits-counter
+  labels:
+    app: hits-counter-app
+spec:
+  ports:
+    - port: 3000
+  selector:
+    app: hits-counter-app
+    tier: app

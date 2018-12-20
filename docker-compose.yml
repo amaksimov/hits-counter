@@ -13,6 +13,7 @@ services:
   app:
     build: .
     command: bundle exec rails s
+    image: hits-counter-app:tag
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - DATABASE_NAME=${DATABASE_NAME}
