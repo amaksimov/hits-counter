@@ -21,7 +21,7 @@ describe('/GET', () => {
 
     it('it should return pageviews per last minute', (done) => {
         chai.request(server)
-            .get('/')
+            .get('/hits')
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property('pageviews');

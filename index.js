@@ -8,7 +8,7 @@ const db = require('./db');
 
 const PORT = process.env.PORT || 1234;
 
-app.get('/', (request, response) => {
+app.get('/hits', (request, response) => {
     db.none('INSERT INTO hits(created_at) VALUES($1)', [new Date()])
         .then(() => {
             const oneMinuteAgo = new Date(new Date() - 60000);
