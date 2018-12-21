@@ -4,5 +4,5 @@ WORKDIR /hits-counter
 ADD package*.json ./
 RUN npm i
 ADD . /hits-counter
-EXPOSE 8080
+EXPOSE 3000
 CMD [ "node", "index.js" ]

@@ -67,7 +67,12 @@ jobs:
             docker tag $IMAGE_ID eu.gcr.io/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:latest
             gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
             docker push eu.gcr.io/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:latest
-
+      - run:
+          name: Deploy to Kubernetes
+          command: |
+            kubectl apply -f kube/deployments/app_deploy.yaml
+            kubectl apply -f kube/services/app_svc.yaml
+            kubectl rollout status deployment/${PROJECT_NAME}
 
 workflows:
   version: 2
