@@ -37,7 +37,7 @@ spec:
               name: "db-user-pass"
               key: "password"
         - name: POSTGRES_DB
-          value: "rails-kube-demo_production"
+          value: "hits-counter"
         - name: PGDATA
           value: "/var/lib/postgresql/data"
         ports:
@@ -45,3 +45,4 @@ spec:
         volumeMounts:
         - mountPath: "/var/lib/postgresql/data"
           name: postgres-pv
+          subPath: postgres

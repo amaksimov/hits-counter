@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: amaksimov/hits-counter:latest
+        image: eu.gcr.io/hits-counter-226206/hits-counter:latest
         env:
         - name: DATABASE_URL
           valueFrom:
@@ -37,4 +37,3 @@ spec:
           value: "3000"
         ports:
           - containerPort: 3000
-        imagePullPolicy: Never

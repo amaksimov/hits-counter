@@ -8,6 +8,8 @@ metadata:
 spec:
   ports:
     - port: 3000
+      name: hits-c-http
   selector:
     app: hits-counter-app
     tier: app
+  type: NodePort

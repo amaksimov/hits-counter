@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
       - name: migrate
-        image: amaksimov/hits-counter:latest
+        image: eu.gcr.io/hits-counter-226206/hits-counter:latest
         command: ["/hits-counter/node_modules/.bin/db-migrate", "up"]
         env:
         - name: DATABASE_URL

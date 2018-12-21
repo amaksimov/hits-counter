@@ -4,9 +4,9 @@ metadata:
   name: hits-counter-ing
 spec:
   rules:
-    - http:
-        paths:
-          - backend:
-              serviceName: hits-counter
-              servicePort: 3000
-            path: /
+  - http:
+      paths:
+      - backend:
+          serviceName: hits-counter
+          servicePort: hits-c-http
+        path: /
