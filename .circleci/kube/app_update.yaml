@@ -57,9 +57,7 @@ spec:
             secretKeyRef:
               name: "app-db-url"
               key: "databaseurl"
-        imagePullPolicy: Never
       restartPolicy: Never
-
 ---
 apiVersion: v1
 kind: Service
