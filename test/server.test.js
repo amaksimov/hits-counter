@@ -9,23 +9,22 @@ chai.should();
 
 chai.use(chaiHttp);
 
-describe('/GET', () => {
+describe('/GET hits', () => {
     before(() => {
         const twoMinutesAgo = new Date(new Date() - 120000);
 
         db.none('TRUNCATE ONLY hits')
             .then(
-                db.none('INSERT INTO hits(created_at) VALUES ($1), ($2)', [new Date(), twoMinutesAgo]),
+                db.none('INSERT INTO hits(route, created_at) VALUES (\'active\', $1), (\'overdue\', $2)', [new Date(), twoMinutesAgo]),
             );
     });
 
-    it('it should return pageviews per last minute', (done) => {
+    it('it should return pageviews object', (done) => {
         chai.request(server)
             .get('/hits')
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property('pageviews');
-                res.body.pageviews.should.equal(2);
                 done();
             });
     });

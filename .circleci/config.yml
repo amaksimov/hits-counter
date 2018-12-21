@@ -70,6 +70,7 @@ jobs:
       - run:
           name: Deploy to Kubernetes
           command: |
+            kubectl apply -f kube/jobs/migrate_db.yaml
             kubectl apply -f kube/deployments/app_deploy.yaml
             kubectl apply -f kube/services/app_svc.yaml
             kubectl rollout status deployment/${PROJECT_NAME}
