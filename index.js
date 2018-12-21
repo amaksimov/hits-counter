@@ -6,7 +6,7 @@ const db = require('./db');
 
 const PORT = process.env.PORT || 1234;
 
-app.get('/hits', (request, response) => {
+app.get('*', (request, response) => {
     db.none('INSERT INTO hits(route, created_at) VALUES($1, $2)', [request.originalUrl, new Date()])
         .then(() => {
             const oneMinuteAgo = new Date(new Date() - 60000);
@@ -15,13 +15,6 @@ app.get('/hits', (request, response) => {
                 .then((hits) => {
                     response.send({ pageviews: hits });
                 });
-        });
-});
-
-app.get('*', (request, response) => {
-    db.none('INSERT INTO hits(route, created_at) VALUES($1, $2)', [request.originalUrl, new Date()])
-        .then(() => {
-            response.sendStatus(200);
         });
 });
 
