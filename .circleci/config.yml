@@ -71,6 +71,9 @@ jobs:
             envsubst < .circleci/kube/app_update.yaml > ${HOME}/patched_app_update.yaml
             kubectl apply -f ${HOME}/patched_app_update.yaml
             kubectl rollout status deployment/${PROJECT_NAME}
+      - run:
+          name: Delete migrate job
+          command: kubectl delete job migrate
 
 workflows:
   version: 2
