@@ -11,7 +11,7 @@ app.get('/hits', (request, response) => {
         .then(() => {
             const oneMinuteAgo = new Date(new Date() - 60000);
 
-            db.any('select count(*), route from hits where created_at > $1 group by route ', [oneMinuteAgo])
+            db.any('select count(*), route from hits where created_at > $1 group by route', [oneMinuteAgo])
                 .then((hits) => {
                     response.send({ pageviews: hits });
                 });
