@@ -3,7 +3,29 @@
 .gitignore
 
 # Ignore all installed node_moduels
-/node_modules/*
+/node_modules
 
 # Ignore circle ci config
 /.circleci
+
+# Ignore eslint config
+.eslintignore
+.eslintrc.json
+
+# Ignore nvm config
+.nvmrc
+
+# Ignore kube config
+/kube
+
+# Ignore tests
+/test
+
+# Ignore docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Ignore README
+README.md
+

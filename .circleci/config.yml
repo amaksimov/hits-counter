@@ -17,9 +17,17 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+
       - run:
           name: npm install
           command: npm i
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
 
       - run:
           name: Npm Audit
@@ -35,7 +43,7 @@ jobs:
 
       - run:
           name: Run tests
-          command: ./node_modules/.bin/mocha --timeout 10000
+          command: npm test
   deploy:
     docker:
       - image: google/cloud-sdk
