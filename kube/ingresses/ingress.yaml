@@ -9,4 +9,3 @@ spec:
       - backend:
           serviceName: hits-counter
           servicePort: hits-c-http
-        path: /
