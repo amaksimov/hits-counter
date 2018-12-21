@@ -5,39 +5,37 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/app
-    machine: true
+    docker:
+      - image: circleci/node:11.4
+        environment:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/hits-counter_test
+      - image: circleci/postgres:9.6-alpine
+        environment:
+          POSTGRES_DB: hits-counter_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
     steps:
       - checkout
 
       - run:
-          name: Install Docker Compose
-          command: |
-              curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-              chmod +x ~/docker-compose
-              sudo mv ~/docker-compose /usr/local/bin/docker-compose
-
-      - run:
-          name: Build application Docker image
-          command: docker-compose build
+          name: npm install
+          command: npm i
 
       - run:
           name: Npm Audit
-          command: docker-compose run app npm audit
+          command: npm audit
 
       - run:
           name: ESLint
-          command: docker-compose run app ./node_modules/.bin/eslint .
+          command: ./node_modules/.bin/eslint .
 
       - run:
           name: Setup DB
-          command: |
-            DATABASE_URL=postgres://postgres:postgres@db:5432 docker-compose run app ./node_modules/.bin/db-migrate db:create hits-counter_test
-            docker-compose run app ./node_modules/.bin/db-migrate up
+          command: ./node_modules/.bin/db-migrate up
 
       - run:
           name: Run tests
-          command: docker-compose run app ./node_modules/.bin/mocha --timeout 10000
+          command: ./node_modules/.bin/mocha --timeout 10000
   deploy:
     docker:
       - image: google/cloud-sdk
