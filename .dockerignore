@@ -29,3 +29,5 @@ docker-compose.yml
 # Ignore README
 README.md
 
+# Ignore docs
+/docs
