@@ -15,7 +15,8 @@ describe('/GET hits', () => {
 
         db.none('TRUNCATE ONLY hits')
             .then(
-                db.none('INSERT INTO hits(route, created_at) VALUES (\'active\', $1), (\'overdue\', $2)', [new Date(), twoMinutesAgo]),
+                db.none('INSERT INTO hits(route, created_at) VALUES (\'/overdue\', $1)', [twoMinutesAgo])
+                    .then(),
             );
     });
 
@@ -25,6 +26,11 @@ describe('/GET hits', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property('pageviews');
+                res.body.pageviews.should.be.an('array');
+                res.body.pageviews[0].should.have.property('route');
+                res.body.pageviews[0].should.have.property('count');
+                res.body.pageviews.map(a => a.route).should.not.include('/overdue');
+                res.body.pageviews.map(a => a.route).should.include('/hits');
                 done();
             });
     });

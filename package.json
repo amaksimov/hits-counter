@@ -20,6 +20,12 @@
     "mocha": "^5.2.0",
     "nodemon": "^1.18.9"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:amaksimov/hits-counter.git"
+  },
+  "author": "Alex Maximov <pumpupumpu@rambler.ru>",
+  "license": "MIT",
   "scripts": {
     "start": "node server.js",
     "test": "./node_modules/.bin/mocha --timeout 10000"
