@@ -1,30 +1,13 @@
 {
-    "env": {
-        "node": true,
-        "es6": true,
-        "mocha": true
-    },
-    "extends": "airbnb",
-    "plugins": [
-        "mocha"
-    ],
-    "rules": {
-        "indent": [
-            "error",
-            4
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "mocha/no-exclusive-tests": "error"
-    }
+ "root": true,
+ "env": {
+  "es6": true,
+  "node": true,
+  "mocha": true
+ },
+ "extends": [ "airbnb", "plugin:import/warnings" ],
+ "parserOptions": {
+  "ecmaVersion": 6,
+  "sourceType": "module"
+ }
 }
