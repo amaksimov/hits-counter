@@ -1,24 +1,9 @@
 version: '3'
 services:
-  db:
-    image: postgres:9.6
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=hits-counter_dev
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
-
   app:
     build: .
     command: bundle exec rails s
     image: hits-counter-app:tag
-    environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/hits-counter_dev
-    depends_on:
-      - db
     ports:
       - 3000:3000
 

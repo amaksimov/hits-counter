@@ -28,11 +28,6 @@ spec:
       - name: app
         image: eu.gcr.io/hits-counter-226206/hits-counter:7bf7eb9c099b
         env:
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: "app-db-url"
-              key: "databaseurl"
         - name: PORT
           value: "3000"
         ports:
