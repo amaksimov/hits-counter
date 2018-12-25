@@ -1,7 +1,8 @@
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import server from '../app/server';
+
 process.env.NODE_ENV = 'test';
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const server = require('../app/server');
 
 chai.should();
 
@@ -14,6 +15,7 @@ describe('/GET hits', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.have.property('pageviews');
+        res.body.pageviews.should.eql(1);
         done();
       });
   });
