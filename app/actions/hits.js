@@ -1,8 +1,8 @@
 let startPointer = null;
 
-const hitsStore = { total: 0 };
+export const hitsStore = { total: 0 };
 
-function commitHit() {
+export function commitHit() {
   const now = Date.now();
 
   if (!startPointer || hitsStore.total === 0) {
@@ -16,19 +16,18 @@ function commitHit() {
   hitsStore.total += 1;
 }
 
-function cleanOverdueHits() {
+export function cleanOverdueHits() {
   if (startPointer === null || hitsStore.total === 0) {
     return;
   }
 
   const oneMinuteAgo = Date.now() - 60 * 1000;
 
-  for (;startPointer < oneMinuteAgo; startPointer += 1) {
+  while (startPointer < oneMinuteAgo) {
     if (typeof hitsStore[startPointer] !== 'undefined') {
       hitsStore.total -= hitsStore[startPointer];
       delete hitsStore[startPointer];
     }
+    startPointer += 1;
   }
 }
-
-module.exports = { hitsStore, cleanOverdueHits, commitHit }

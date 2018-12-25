@@ -1,9 +1,13 @@
-const app = module.exports = require('express')();
+import express from 'express';
+import { hitsStore, commitHit, cleanOverdueHits } from '../actions/hits';
 
-const {hitsStore, commitHit,cleanOverdueHits} = require('../actions/hits.js');
+
+const app = express();
 
 app.get('/', (request, response) => {
   commitHit();
   cleanOverdueHits();
   response.send({ pageviews: hitsStore.total });
 });
+
+export default app;
