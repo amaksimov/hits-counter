@@ -1,9 +1,3 @@
-const express = require('express');
-
-const app = express();
-
-const PORT = process.env.PORT || 1234;
-
 let startPointer = null;
 
 const hitsStore = { total: 0 };
@@ -27,7 +21,7 @@ function cleanOverdueHits() {
     return;
   }
 
-  const oneMinuteAgo = Date.now() - 5 * 1000;
+  const oneMinuteAgo = Date.now() - 60 * 1000;
 
   for (;startPointer < oneMinuteAgo; startPointer += 1) {
     if (typeof hitsStore[startPointer] !== 'undefined') {
@@ -37,10 +31,4 @@ function cleanOverdueHits() {
   }
 }
 
-app.get('/hits', (request, response) => {
-  commitHit();
-  cleanOverdueHits();
-  response.send({ pageviews: hitsStore.total });
-});
-
-module.exports = app.listen(PORT);
+module.exports = { hitsStore, cleanOverdueHits, commitHit }

@@ -10,7 +10,7 @@ NodeJS application, which shows the number of pageviews for the past 1 minute.
 
 ## Live
 
-[Try this magic app yourself](http://35.244.129.156)
+[Try this magic app yourself](http://35.244.129.156/hits)
 
 ## Requirements
 
