@@ -6,6 +6,9 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "eslint": "^5.10.0",
@@ -24,6 +27,7 @@
   "author": "Alex Maximov <pumpupumpu@rambler.ru>",
   "license": "MIT",
   "scripts": {
+    "build": "./node_modules/.bin/babel --out-dir=lib app",
     "start": "node server.js",
     "test": "./node_modules/.bin/mocha --timeout 10000"
   }

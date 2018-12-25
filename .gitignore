@@ -1,1 +1,5 @@
+# Ignore local modules
 /node_modules/*
+
+# Ignore transpilled sources
+/lib

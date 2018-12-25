@@ -1,11 +1,8 @@
 import express from 'express';
+import hits from './hits';
 
-const app = express();
+const router = express.Router();
 
-app.use('/hits', require('./hits'));
+router.use('/hits', hits);
 
-app.all('*', (request, response) => {
-  response.status(404).send({ msg: 'Not found' });
-});
-
-export default app;
+export default router;
