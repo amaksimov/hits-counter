@@ -20,13 +20,13 @@ NodeJS application, which shows the number of pageviews for the past 1 minute.
 ## Getting started
 
 ```bash
-npm install
-nodemon index.js
+npm i
+nodemon app/server.js
 ```
 
 ## Docker
 
 ```bash
-docker-compose build
-docker-compose up -d app
+docker build -t amaksimov/hits-counter .
+docker run --name hits-counter -p 3000:3000 -d amaksimov/hits-counter
 ```
