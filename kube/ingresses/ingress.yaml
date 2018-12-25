@@ -6,6 +6,7 @@ spec:
   rules:
   - http:
       paths:
-      - backend:
+      - path: /hits
+        backend:
           serviceName: hits-counter
           servicePort: hits-c-http

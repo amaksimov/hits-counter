@@ -1,8 +1,12 @@
 import express from 'express';
-import hits from './hits';
+import { hitsStore, commitHit, cleanOverdueHits } from '../actions/hits';
 
 const router = express.Router();
 
-router.use('/hits', hits);
+router.get('/', (request, response) => {
+  commitHit();
+  cleanOverdueHits();
+  response.send({ pageviews: hitsStore.total });
+});
 
 export default router;
