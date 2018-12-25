@@ -8,10 +8,10 @@ chai.should();
 
 chai.use(chaiHttp);
 
-describe('/GET hits', () => {
+describe('/GET', () => {
   it('it should return pageviews object', (done) => {
     chai.request(server)
-      .get('/hits')
+      .get('/')
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.have.property('pageviews');
